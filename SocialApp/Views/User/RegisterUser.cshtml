@@ -1,0 +1,99 @@
+﻿@using SocialApp.Core.Application.ViewModels.User
+@model SaveUserVm
+
+@{
+    ViewData["Title"] = "Registro de nuevo usuario";
+}
+
+<div class="container my-5">
+
+    <div class="row">
+
+        <div class="col-md-3 my-5 text-white">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-md-6 my-5 fw-bold text-white">
+
+            <div class="card bg-dark bg-opacity-25">
+
+                <div class="card-header bg-dark bg-opacity-50 text-white text-center rounded-end rounded-start">
+                    <h3> Registro usuario </h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="RegisterUser">
+
+                        <div class="container-fluid">
+                            <div class="row">
+
+                                <div class="col-6">
+
+                                    <div class="my-4 ">
+                                        <label asp-for="Name" class="form-label"> Nombre: </label>
+                                        <input asp-for="Name" class="form-control">
+                                    </div>
+
+
+                                    <div class="my-4 ">
+                                        <label asp-for="Phone" class="form-label "> Telefono: </label>
+                                        <input asp-for="Phone" placeholder="(___) ___-____" data-slots="_" 
+                                               class="form-control">
+                                       
+                                    </div>
+
+                                    <div class="my-4 ">
+                                        <label asp-for="UserName" class="form-label "> UserName: </label>
+                                        <input asp-for="UserName" class="form-control">
+                                    </div>
+
+                                    <div class="my-4 ">
+                                        <label asp-for="ConfirnmPassword" class="form-label">Confirmar Password: </label>
+                                        <input asp-for="ConfirnmPassword" class="form-control">
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-6">
+
+                                    <div class="my-4 ">
+                                        <label asp-for="Apellido" class="form-label"> Apellido: </label>
+                                        <input asp-for="Apellido" class="form-control">
+                                    </div>
+
+                                    <div class="my-4 ">
+                                        <label asp-for="Email" class="form-label "> Email: </label>
+                                        <input asp-for="Email" class="form-control">
+                                    </div>
+
+                                    <div class="my-4 ">
+                                        <label asp-for="Password" class="form-label">Password: </label>
+                                        <input asp-for="Password" class="form-control">
+                                    </div>
+
+                                    <div class="my-4 ">
+                                        <label asp-for="File" class="form-label">Imagen de perfil:</label>
+                                        <input required asp-for="File" class="form-control" />
+                                    </div>
+
+                                    <div class="mt-5">
+                                        <a asp-controller="User" asp-action="Index"
+                                           class="btn btn-outline-light btn-sm float-end mx-2"> Volver atras </a>
+
+                                        <button type="submit" class="btn btn-primary btn-sm float-end"> Continuar </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

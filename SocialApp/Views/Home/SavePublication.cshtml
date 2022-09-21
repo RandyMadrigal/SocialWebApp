@@ -1,0 +1,68 @@
+﻿@using SocialApp.Core.Application.ViewModels.Publication
+
+@model SavePublicationVm;
+
+@{
+    ViewData["Title"] = "Editar publicaciones";
+}
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-md-3 my-5 text-white">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-5 my-5">
+
+            <div class="card bg-dark bg-opacity-25 text-light">
+
+                <div class="card-header bg-dark text-white text-center rounded-end rounded-start">
+                    <h3> Editar publicacion </h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data" asp-controller="Home"
+                          asp-action="Edit">
+
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label">Titulo de la publicacion: </label>
+                            <input asp-for="Titulo" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Imagen Principal</label>
+                            <input asp-for="File" class="form-control" />
+                        </div>
+
+                        <div class="my-2">
+
+                            <a asp-controller="Home" asp-action="Index"
+                               class="btn btn-danger float-end mx-3">volver atras</a>
+
+                            <button type="submit" class="btn btn-primary float-end">Guardar</button>
+
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 my-5">
+            <div class="col-md-4">
+
+                <div class="card bg-dark bg-opacity-50 animate__animated animate__fadeIn">
+                    <img src="@Model.PostImg"
+                         class="rounded mx-auto d-block img-size-Home text-white" alt="no hay imagen disponible">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

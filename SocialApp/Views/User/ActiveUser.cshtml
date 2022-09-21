@@ -1,0 +1,63 @@
+﻿@using SocialApp.Core.Application.ViewModels.User
+
+@model PasswordVm
+
+@{
+    ViewData["Title"] = "Active User";
+}
+
+<div class="container">
+    <div class="row">
+
+        
+
+        <div class="col-md-6 offset-3">
+
+            <div class="card mb-3 bg-dark text-white">
+
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                <div class="card-header bg-dark bg-opacity-50 text-white text-center rounded-end rounded-start">
+                    <h3> Activar Usuario </h3>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="col-md-6">
+
+                        <form method="post" asp-controller="User" asp-action="ActiveUser">
+
+                            <div class="my-4 ">
+                                <label asp-for="UserName" class="form-label"> User name: </label>
+                                <input asp-for="UserName" class="form-control">
+                            </div>
+
+                            <div class="my-4 ">
+                                <label asp-for="Password" class="form-label"> Nueva Contraseña: </label>
+                                <input asp-for="Password" class="form-control">
+                            </div>
+
+                            <div class="my-4 ">
+                                <label asp-for="ConfirnmPassword" class="form-label"> Confirmar Contraseña: </label>
+                                <input asp-for="ConfirnmPassword" class="form-control">
+                            </div>
+
+                            <a asp-controller="User" asp-action="Index"
+                               class="btn btn-outline-light btn-sm float-end mx-2"> Volver atras </a>
+
+                            <button type="submit" class="btn btn-primary btn-sm float-end"> Activar </button>
+                                                        
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+

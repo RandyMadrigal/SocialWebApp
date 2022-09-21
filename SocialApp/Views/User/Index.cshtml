@@ -1,0 +1,66 @@
+﻿@using SocialApp.Core.Application.ViewModels.User
+@model LoginVm
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container my-5 fw-bold text-light">
+    <div class="row">
+        <div class="col-md-6 offset-3 my-5">
+
+            <div class="card my-3 bg-dark bg-opacity-50 animate__animated animate__fadeInDown">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <img src="~/Img/App/login.png" class="img-fluid rounded mx-auto d-block my-4 ms-3" alt="...">
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <div class="card-body">
+
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                            <form asp-controller="User" asp-action="Index" method="post">
+                                <h5> Log in ~ SocialApp </h5>
+
+                                <div class="my-3">
+                                    <label asp-for="UserName" class="form-label" placeholder="Enter your user name">User name: </label>
+                                    <input asp-for="UserName" class="form-control">
+
+                                </div>
+
+                                <div class="my-3">
+                                    <label asp-for="Password" class="form-label" placeholder="Enter your user Password">Password: </label>
+                                    <input asp-for="Password" class="form-control">
+
+                                </div>
+
+                                <div class="my-2">
+
+                                    <a asp-controller="User" asp-action="RegisterUser"
+                                       class="btn btn-outline-light btn-sm float-end mx-3">¿Todavia no tienes usuario? Registrate c: </a>
+
+                                    <button type="submit" class="btn btn-outline-light"> Log in </button>
+                                </div>
+
+
+                                <div class="my-2">
+
+                                    <a asp-controller="User" asp-action="SavePass"
+                                       class="btn btn-outline-light btn-sm float-end mx-3"> ¿Olvido su Contraseña? </a>
+
+                                </div>
+
+                            </form>
+
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

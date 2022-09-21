@@ -1,0 +1,63 @@
+﻿@using SocialApp.Core.Application.ViewModels.Commentary
+@using SocialApp.Core.Application.ViewModels.Publication
+
+
+ @model SavePublicationVm
+
+@{
+    ViewData["Title"] = "Comentarios";
+
+}
+
+<div class="container mb-3">
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-6 mt-2">
+            <div class="card bg-transparent text-white text-center">
+                <div class="card-title">
+                    <h3 class="card-text fw-bold "> COMENTARIO: </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-2">
+
+            <div class="card bg-dark rounded border border-warning">
+
+                <div class="card-body">
+
+                    <h5 class="text-white">Nuevo comentario</h5>
+
+                    <form method="post" asp-controller="Comments" asp-action="AddComment">
+
+                        <div class="col-md-12 my-2">
+
+                            <textarea asp-for="@Model.Comentario" type="text" class="form-control w-100" placeholder="add comment here..." rows="1"> </textarea>
+
+                            <button type="submit" class="btn btn-primary my-2 ">Publicar</button>
+
+                            <input type="hidden" asp-for="@Model.Id" />
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="card-footer border-top border-warning">
+
+                    <a asp-controller="Home" asp-action="Index" 
+                       class="btn btn-sm btn-outline-danger float-end">Volver atras</a>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

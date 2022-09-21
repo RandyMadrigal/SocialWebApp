@@ -1,0 +1,211 @@
+﻿@using SocialApp.Core.Application.ViewModels.Friend
+@using SocialApp.Core.Application.ViewModels.Commentary
+@using SocialApp.Core.Application.ViewModels.Publication
+@using SocialApp.Core.Application.ViewModels.User
+@using SocialApp.Core.Application.Helpers
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContext;
+
+@model SaveFriendVm
+
+@{
+
+    UserVm user = httpContext.HttpContext.Session.Get<UserVm>("user");
+    ViewData["Title"] = "Friends";
+}
+
+<div class="container-fluid mb-3">
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <div class="col-md-12 col-sm-6 mt-2">
+
+                <div class="card bg-transparent text-white text-center">
+                    <div class="card-title">
+                        <h3 class="card-text fw-bold "> PUBLICACIONES DE AMIGOS </h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-10 offset-1">
+
+                @if (ViewBag.PublicationList == null || ViewBag.PublicationList.Count == 0)
+                {
+                    <h2 class="text-white mx-5 my-5"> No tienes amigos agregados. </h2>
+                }
+                else
+                {
+                    @foreach (PublicationVm item in ViewBag.PublicationList)
+                    {
+                        <div class="card text-white mt-3 bg-dark bg-opacity-50 animate__animated animate__fadeIn
+                     rounded border border-warning">
+
+                            <div>
+                                <img src="@item.UserImg" class=" float-start rounded mx-auto d-block img-size-profileImg rounded-circle"
+                                     alt="no hay imagen disponible" />
+
+                                <h6 class="mt-3"> @item.UserName  </h6>
+                            </div>
+
+                            <img src="@item.PostImg" class="rounded mx-auto d-block img-size-post" alt="...">
+
+                            <div class="card-body">
+
+                                <p class="card-text fw-bold">
+                                    @item.Titulo
+                                    <span class="text-white fw-light float-end">
+                                        Created at: @item.Created.ToString("dd/MM/yyyy: h:mm tt")
+                                    </span>
+                                </p>
+
+                                @if (ViewBag.CommentaryList == null || ViewBag.CommentaryList.Count == 0)
+                                {
+                                    <p class="card-text mt-3"> No hay comentarios </p>
+                                }
+                                else
+                                {
+                                    @foreach (CommentaryVm x in ViewBag.CommentaryList)
+                                    {
+                                        @* Aqui se deben generar los comentarios *@
+
+                                        @* Imagen de usuario que hizo el comentario *@
+                                        <div class="row">
+                                            <div class="col-md-1 me-4">
+                                                <img src="@x.UserImg" class="float-start mx-auto d-block img-size-profileImg rounded-circle"
+                                                     alt="....." />
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p class="card-text mt-3"> @x.Comentario </p>
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+
+                                        @* Aqui se deben generar dinamicamente los comentarios *@
+
+                                    }
+                                }
+
+                            </div>
+
+                            <div class="card-footer border-top border-warning">
+                                <div class="row">
+
+                                    <div class="col-md-2 my-2">
+
+                                        @* Comentario de usuario conectado *@
+                                        <img src="@user.UserImg" class="rounded mx-auto d-block img-size-profileImg rounded-circle"
+                                             alt="no hay imagen disponible" />
+
+                                    </div>
+
+                                    <div class="col-md-4 mt-3">
+
+                                        <a asp-controller="Comments" asp-action="Index" asp-route-Id="@item.Id"
+                                           class="btn btn-sm btn-outline-primary float-start">Comentar</a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="col-md-4">
+
+                <div class="card bg-transparent text-white text-center">
+                    <div class="card-title">
+                        <h3 class="card-text fw-bold "> AMIGOS </h3>
+                    </div>
+                </div>
+
+            </div>
+
+            @if (user.IsInactive == "Inactivo")
+            {
+                <h5 class="text-white">
+                    Para Agregar amigos debe activar su usuario,
+                    Enlace en su correo electronico
+                </h5>
+            }
+            else
+            {
+                <div class="my-4 fw-bold text-white ">
+
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <form method="post" asp-controller="Friends" asp-action="AddFriend">
+
+                        <label asp-for="FriendName" class="form-label"> User name: </label>
+                        <input asp-for="FriendName" class="form-control w-75" placeholder="Nombre de usuario">
+
+                        <button type="submit" class="btn btn-primary btn-sm float-md-start my-2"> Buscar </button>
+
+                    </form>
+
+                </div>
+            }
+
+
+
+            <div class="col-md-12 my-5">
+
+                @if (ViewBag.FriendsList == null || ViewBag.FriendsList.Count == 0)
+                {
+                    <h2 class="text-white mx-5 my-5"> No hay amigos agregados </h2>
+                }
+                else
+                {
+
+
+
+                    @foreach (FriendVm item in ViewBag.FriendsList)
+                    {
+
+
+                        <div class="card text-white mt-3 bg-dark bg-opacity-50 animate__animated animate__fadeIn
+                                             rounded border border-warning w-50">
+
+                            <img src="@item.UserImg"
+                                 class="rounded mx-auto d-block img-size-addFriend rounded-circle" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">@item.FriendName</h5>
+
+                                <p class="card-text"> @item.Name  @item.Apellido</p>
+
+                                <a asp-controller="Friends" asp-action="Delete" asp-route-Id="@item.Id"
+                                   class="btn btn-sm btn-outline-danger float-end mx-2">Borrar</a>
+
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" asp-for="@item.Id" />
+                    }
+
+
+                }
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

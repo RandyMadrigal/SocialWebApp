@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using SocialApp.Core.Application.Helpers;
+@using SocialApp.Core.Application.ViewModels.User;
+@inject IHttpContextAccessor httpContext;
+
+@{
+    UserVm user = httpContext.HttpContext.Session.Get<UserVm>("user");
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SocialApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /> <!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> <!--Animated CSS-->
+
+
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark fixed-top text-white">
+            <div class="container">
+
+                <a class="navbar-brand text-white" asp-controller="@(user != null ?  "Home" : "User")" asp-action="Index">
+                    <img src="~/img/App/Logo.png" alt="Img" />SocialApp
+                </a>
+
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        @if (user != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Index"> Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Friends" asp-action="Index">Friends</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="d-flex text-light">
+                        @if (user != null)                        {
+
+                            <a class="btn btn-outline-light btn-sm"
+                               asp-controller="User" asp-action="LogOut"> Cerrar Sesion</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-light btn-sm"
+                               asp-controller="User" asp-action="Index"> Iniciar Sesion</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container-fluid marginTop ">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-white bg-dark bg-gradient mt-5">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    @DateTime.Now.Year - EmarketApp /
+                </div>
+                @if (user != null)
+                {
+                    <p> Hi @user.UserName  </p>
+                }
+
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

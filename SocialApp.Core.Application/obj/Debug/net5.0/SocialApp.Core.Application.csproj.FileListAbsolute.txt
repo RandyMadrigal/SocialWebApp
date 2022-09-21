@@ -1,0 +1,15 @@
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\SocialApp.Core.Application.deps.json
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\SocialApp.Core.Application.dll
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\ref\SocialApp.Core.Application.dll
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\SocialApp.Core.Application.pdb
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\SocialApp.Core.Domain.dll
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\bin\Debug\net5.0\SocialApp.Core.Domain.pdb
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.csproj.AssemblyReference.cache
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.AssemblyInfoInputs.cache
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.AssemblyInfo.cs
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.csproj.CoreCompileInputs.cache
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.csproj.CopyComplete
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.dll
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\ref\SocialApp.Core.Application.dll
+C:\Users\Randy\Desktop\Chan\Programacion 3\SocialApp\SocialApp.Core.Application\obj\Debug\net5.0\SocialApp.Core.Application.pdb

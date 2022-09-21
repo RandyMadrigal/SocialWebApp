@@ -1,0 +1,65 @@
+﻿@using SocialApp.Core.Application.ViewModels.User
+
+@model PasswordVm
+
+@{
+    ViewData["Title"] = "Cambiar Contraseña";
+}
+
+<div class="container my-5">
+
+    <div class="row">
+
+        <div class="col-md-3 my-5 text-white">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-md-6 my-5 fw-bold text-white">
+
+            <div class="card bg-dark bg-opacity-25">
+
+                <div class="card-header bg-dark bg-opacity-50 text-white text-center rounded-end rounded-start">
+                    <h3> Cambiar Contraseña </h3>
+                </div>
+
+                <div class="card-body">               
+
+                          <div class="row">
+
+                                <div class="col-md-6">
+
+                                    <form method="post" asp-controller="User" asp-action="SavePass">
+
+
+                                        <div class="my-4 ">
+                                            <label asp-for="UserName" class="form-label"> User name: </label>
+                                            <input asp-for="UserName" class="form-control">
+                                        </div>
+
+                                        <div class="my-4 ">
+                                            <label asp-for="Password" class="form-label"> Nueva Contraseña: </label>
+                                            <input asp-for="Password" class="form-control">
+                                        </div>
+
+                                        <div class="my-4 ">
+                                            <label asp-for="ConfirnmPassword" class="form-label"> Confirmar Contraseña: </label>
+                                            <input asp-for="ConfirnmPassword" class="form-control">
+                                        </div>
+
+                                        <a asp-controller="User" asp-action="Index"
+                                           class="btn btn-outline-light btn-sm float-end mx-2"> Volver atras </a>
+
+                                        <button class="btn btn-primary btn-sm float-end"> Buscar </button>
+
+                                    </form>
+
+                                </div>
+                            </div>                       
+                      </div>                    
+                </div>
+            </div>
+       </div>
+ </div>
+
+

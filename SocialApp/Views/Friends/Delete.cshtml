@@ -1,0 +1,37 @@
+﻿@using SocialApp.Core.Application.ViewModels.Friend
+
+@model SaveFriendVm
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<div class="container my-5">
+
+
+    <div class="col-md-5 offset-3 my-5 mt-4">
+
+        <div class="card bg-dark border border-danger">
+            <div class="card-header bg-dark text-white text-center rounded-end ">
+                <h3> ¿Eliminar a @Model.UserName amigo ? </h3>
+            </div>
+
+            <div class="card-body">
+
+                <form method="post" asp-controller="Friends" asp-action="DeletePost">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="my-2 text-center">
+
+                        <button type="submit" class="btn btn-outline-danger btn-lg"> Eliminar </button>
+
+                        <a asp-controller="Friends" asp-action="Index"
+                           class="btn btn-outline-primary mx-3 btn-lg"> Cancelar </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,242 @@
+﻿@using SocialApp.Core.Application.ViewModels.Publication
+@using SocialApp.Core.Application.ViewModels.Commentary
+@using Microsoft.AspNetCore.Http;
+@using SocialApp.Core.Application.Helpers;
+@using SocialApp.Core.Application.ViewModels.User;
+@inject IHttpContextAccessor httpContext;
+
+@model SavePublicationVm
+
+@{
+    int PostTotal = 0;
+
+   
+        foreach (PublicationVm item in ViewBag.PublicationList)
+        {
+            PostTotal = item.QuantityPost;
+        }
+
+    
+
+
+
+    UserVm user = httpContext.HttpContext.Session.Get<UserVm>("user");
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid mb-3">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-6 mt-2">
+            <div class="card bg-transparent text-white text-center">
+                <div class="card-title">
+                    <h3 class="card-text fw-bold "> MIS PUBLICACIONES </h3>                                      
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        @if (user.IsInactive == "Inactivo")
+        {
+            <form action="/" method="post"></form>
+            <h5 class="text-white">
+                Para crear publicaciones debe activar su usuario,
+                Enlace en su correo electronico
+            </h5>
+        }
+        else
+        {
+
+    <div class="col-md-8 offset-2">
+
+        <a class="btn btn-primary my-1 mb-3" data-bs-toggle="collapse" href="#newpost" role="button">New post </a>
+        <span asp-validation-for="Titulo" class="text-danger fw-bold"> </span>
+
+        <div class="collapse" id="newpost">
+
+            <div class="card bg-dark border-top border-warning">
+
+                <div class="card-body ">
+
+                    <h5 class="text-white">Nueva publicacion  </h5>
+
+                    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Create">
+
+                        <div class="d-flex justify-content-between my-2">
+
+                            <input required asp-for="File" class="form-control w-25  me-4" type="file">
+
+                            <textarea asp-for="Titulo" class="form-control w-75" placeholder="Describe yourself here..." rows="1"> </textarea>
+
+
+                            <button type="submit" class="btn btn-primary mx-2">Publicar</button>
+
+                            <input type="hidden" asp-for="Id" />
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+
+    </div>
+
+    <div class="row">
+
+        @*Card Profile Info*@
+        <div class="col-md-3 ">
+
+            <div class="card text-white mt-3 bg-dark bg-opacity-50 animate__animated animate__fadeIn border-top border-warning">
+
+                <img src="@user.UserImg" class=" mt-2 float-start rounded mx-auto d-block img-size-Home rounded-circle border border-warning"
+                     alt="no hay imagen disponible" />
+
+                <div class="card-body">
+
+                    <h5 class="card-title text-center"> <i class="fa-solid fa-child-reaching"></i> @user.UserName</h5>
+
+                    <div class="d-flex justify-content-evenly">
+
+                        <p class="card-text"> Publicaciones: @PostTotal </p>
+
+                    </div>
+
+                    <h6 class="card-text"> <i class="fa-solid fa-mobile-retro"></i>  @user.Phone</h6>
+
+                    <h6 class="card-text"> <i class="fa-solid fa-envelope-circle-check"></i> @user.Email</h6>
+
+
+                    @if (@user.IsInactive == "Activo")
+                    {
+                        <p class="fw-bold">  Cuenta Activa   </p>
+                    }
+                    else
+                    {
+                        <p class="fw-bold">  Cuenta Inactiva   </p>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+        @*Card Profile Info*@
+
+        
+
+        @*Card POST Info*@
+        <div class="col-md-6">
+
+            @if (ViewBag.PublicationList == null || ViewBag.PublicationList.Count == 0)
+            {
+                <h2 class="text-white mx-5 my-5"> No hay publicaciones </h2>
+            }
+            else
+            {
+                @foreach (PublicationVm item in ViewBag.PublicationList)
+                {
+                    <div class="card text-white mt-3 bg-dark bg-opacity-50 animate__animated animate__fadeIn
+                                 rounded border border-warning">
+
+                        <div>
+                            <img src="@user.UserImg" class=" float-start rounded mx-auto d-block img-size-profileImg rounded-circle"
+                                 alt="no hay imagen disponible" />
+
+                            <h6 class="mt-3">
+
+                                @user.UserName
+
+                                <a asp-controller="Home" asp-action="Delete" asp-route-Id="@item.Id"
+                                   class="btn btn-sm btn-outline-danger float-end mx-2">Borrar</a>
+
+                                <a asp-controller="Home" asp-action="Edit" asp-route-Id="@item.Id"
+                                   class="btn btn-sm btn-outline-primary float-end">Editar</a>
+
+                            </h6>
+
+                        </div>
+
+                        <img src="@item.PostImg" class="rounded mx-auto d-block img-size-post" alt="...">
+
+                        <div class="card-body">
+
+                            <p class="card-text fw-bold">
+                                @item.Titulo
+                                <span class="text-white fw-light float-end"> Created at: @item.Created.ToString("dd/MM/yyyy: h:mm tt") </span>
+                            </p>
+
+                            @if (ViewBag.CommentaryList == null || ViewBag.CommentaryList.Count == 0)
+                            {
+                                <p class="card-text mt-3"> No hay comentarios </p>
+                            }
+                            else
+                            {
+                                @foreach (CommentaryVm x in ViewBag.CommentaryList)
+                                {
+                                    @* Aqui se deben generar los comentarios *@
+
+                                    @* Imagen de usuario que hizo el comentario *@
+                                    <div class="row">
+                                            <div class="col-md-1 me-4">
+                                                <img src="@x.UserImg" class="float-start mx-auto d-block img-size-profileImg rounded-circle"
+                                                     alt="....." />
+                                            </div>
+                                            <div class="col-md-10">
+                                                 <p class="card-text mt-3"> @x.Comentario </p>
+                                            </div>
+                                    </div>
+                                    <hr />
+                                   
+
+                                    @* Aqui se deben generar dinamicamente los comentarios *@
+
+                                }
+                            }
+
+                        </div>
+
+                        <div class="card-footer border-top border-warning">
+                            <div class="row">
+
+                                <div class="col-md-2 my-2">
+
+                                    @* Comentario de usuario conectado *@
+                                    <img src="@user.UserImg" class="rounded mx-auto d-block img-size-profileImg rounded-circle"
+                                         alt="no hay imagen disponible" />
+
+                                </div>
+
+                                <div class="col-md-4 mt-3">
+
+                                    <a asp-controller="Comments" asp-action="Index" asp-route-Id="@item.Id"
+                                       class="btn btn-sm btn-outline-primary float-start">Comentar</a>
+                                   
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                }
+            }
+
+        </div>
+
+        @*Card Profile Info*@
+
+    </div>
+
+</div>
+
+
+
+
